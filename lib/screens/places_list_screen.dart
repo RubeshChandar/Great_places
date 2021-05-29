@@ -38,19 +38,24 @@ class PlacesListScreen extends StatelessWidget {
                     ? ch
                     : ListView.builder(
                         itemCount: greatPlaces.items.length,
-                        itemBuilder: (ctx, i) => ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage:
-                                FileImage(greatPlaces.items[i].image),
+                        itemBuilder: (ctx, i) => Card(
+                          elevation: 5,
+                          margin: EdgeInsets.all(7),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.all(8),
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  FileImage(greatPlaces.items[i].image),
+                            ),
+                            title: Text(greatPlaces.items[i].title),
+                            subtitle: Text(greatPlaces.items[i].location.address),
+                            onTap: () {
+                              Navigator.of(context).pushNamed(
+                                PlaceDetailScreen.routeName,
+                                arguments: greatPlaces.items[i].id,
+                              );
+                            },
                           ),
-                          title: Text(greatPlaces.items[i].title),
-                          subtitle: Text(greatPlaces.items[i].location.address),
-                          onTap: () {
-                            Navigator.of(context).pushNamed(
-                              PlaceDetailScreen.routeName,
-                              arguments: greatPlaces.items[i].id,
-                            );
-                          },
                         ),
                       ),
               ),
